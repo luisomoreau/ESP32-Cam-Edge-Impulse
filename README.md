@@ -1,3 +1,5 @@
+*Official repository is now located here: [https://github.com/edgeimpulse/example-esp32-cam](https://github.com/edgeimpulse/example-esp32-cam)*
+
 # ESP32 Cam and Edge Impulse
 
 How to run custom inference on a ESP32 cam using Edge Impulse. 
