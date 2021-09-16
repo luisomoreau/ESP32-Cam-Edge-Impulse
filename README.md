@@ -1,19 +1,16 @@
-*Official repository is now located here: [https://github.com/edgeimpulse/example-esp32-cam](https://github.com/edgeimpulse/example-esp32-cam)*
+Official repository is now located here: [https://github.com/edgeimpulse/example-esp32-cam](https://github.com/edgeimpulse/example-esp32-cam)
 
 # ESP32 Cam and Edge Impulse
 
 How to run custom inference on a ESP32 cam using Edge Impulse. 
 
-*Note: I've used these tutorials to get started:*
-
-- [TinyML ESP32-CAM: Edge Image classification with Edge Impulse](https://www.survivingwithandroid.com/tinyml-esp32-cam-edge-image-classification-with-edge-impulse/) 
-- [https://github.com/v12345vtm/esp32-cam-webserver-arduino-simplified-arduino-html](https://github.com/v12345vtm/esp32-cam-webserver-arduino-simplified-arduino-html)
-
 ### Material
 
 ![esp32-cam](Documentation/esp32-cam.jpg)
 
-I have been testing the code using the AI Thinker ESP32 Cam module. It should work the same with the Wrover board. To use this board, please select your board in the Arduino code the following lines:
+This code has been tested the AI Thinker ESP32 Cam module. It should work the same with the Wrover board or an board that has PSRAM. 
+
+To use this board, please select your board in the Arduino code the following lines:
 
 ```
 // Select camera model
@@ -30,13 +27,18 @@ I have been testing the code using the AI Thinker ESP32 Cam module. It should wo
 
 ## Steps
 
-* Create your model using [Edge Impulse](https://edgeimpulse.com)
+* Create your Image Classification model using [Edge Impulse](https://edgeimpulse.com).
+
+*Due to the board limitations, you may need to train your model with 96x96 images and use the MobileNetV1 0.01:*
+
+![creat-impulse](Documentation/create-impulse.png)
+
 * Download the Arduino library under the `Deployment` tab in the Edge Impulse studio
 ![dl-arduino-lib](Documentation/deployment-tab.png)
 
-### Basic Image Classification
+### Basic Image Classification Example
 
-*Note: This project does not do a proper resize of the image capture but cutout the data*
+*Note: On Sept 9th 2021, the issue predicting always the same classes has been fixed*
 
 * Open the `Basic-Image-Classification.ino` file under the `/Basic-Image-Classification` folder.
 * Import the .zip library you have downloaded from Edge Impulse Studio
@@ -47,9 +49,13 @@ I have been testing the code using the AI Thinker ESP32 Cam module. It should wo
 ![serial-monitor](Documentation/open-serial.png)
 ![inference](Documentation/inference.png)
 
-### Advanced Image Classification
+### Advanced Image Classification Example (Deprecated)
 
-*Note: Here we use the ESP SDK to resize the image in RGB888 format using the bilinear interpolation technique. You can see the funtion declaration [on Espressif's Github repository](https://github.com/espressif/arduino-esp32/blob/master/tools/sdk/esp32/include/esp-face/image_util/include/image_util.h#L335).
+*Note: 
+Deprecated since Basic Example has been fixed and also support bilinear interpolation technique to resize the frame.*
+
+*Note 2: 
+Here we use the ESP SDK to resize the image in RGB888 format using the bilinear interpolation technique. You can see the funtion declaration [on Espressif's Github repository](https://github.com/espressif/arduino-esp32/blob/master/tools/sdk/esp32/include/esp-face/image_util/include/image_util.h#L335)*.
 
 * Open the `Basic-Image-Classification.ino` file under the `/Advanced-Image-Classification` folder.
 * Set your WIFI credentials
@@ -65,3 +71,10 @@ I have been testing the code using the AI Thinker ESP32 Cam module. It should wo
 * Click on `Run inference`:
 ![inference-50c](Documentation/inference-50c.png)
 ![inference-1e](Documentation/inference-1e.png)
+
+## Ressources
+
+*Note: Theses tutorials / repositories have been used to create this project:*
+
+- [TinyML ESP32-CAM: Edge Image classification with Edge Impulse](https://www.survivingwithandroid.com/tinyml-esp32-cam-edge-image-classification-with-edge-impulse/) 
+- [https://github.com/v12345vtm/esp32-cam-webserver-arduino-simplified-arduino-html](https://github.com/v12345vtm/esp32-cam-webserver-arduino-simplified-arduino-html)
